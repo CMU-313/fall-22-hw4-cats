@@ -1,0 +1,99 @@
+openapi: 3.0.3
+info:
+  title: Applicant Success API 3.0
+  description: |-
+    This microservice predicts applicant success to help the new graduate admissions system for CMU. 
+    This design was created because the number of applicants has been increasing each year and has become so large that admissions takes too much effort and time.
+
+  version: 1.0.11
+externalDocs:
+  description: Find out more about this project
+  url: https://cmu-313.github.io//assignments/hw4
+servers:
+  - url: https://github.com/CMU-313/fall-22-hw4-cats
+tags:
+  - name: predict
+    description: Predict the success of an applicant
+paths:
+  /predict:
+    put:
+      tags:
+        - predict
+      summary: Update applicant pool data
+      description: Update existing applicant data
+      operationId: updateApplicantPool
+      requestBody:
+        description: Update the existing applicant pool data
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Applicant'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Applicant'          
+        '400':
+          description: Invalid input
+    post:
+      tags:
+        - predict
+      summary: Predict the success of an applicant
+      description: Predict the success of a new applicant
+      operationId: predictSuccess
+      requestBody:
+        description: Predict the success of a new applicant
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Applicant'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Applicant'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Applicant'
+        '400':
+          description: Invalid input
+
+components:
+  schemas:
+    Applicant:
+      type: object
+      properties:
+        school:
+          type: string
+          example: GP
+        reason:
+          type: string
+          example: home
+        failures:
+          type: integer
+          format: int32
+          example: 3
+        activities:
+          type: boolean
+          example: True
+        higher:
+          type: boolean
+          example: True
+        absences:
+          type: integer
+          format: int32
+          example: 10
+        G1:
+          type: integer
+          format: int32
+          example: 10
+        G2:
+          type: integer
+          format: int32
+          example: 16
