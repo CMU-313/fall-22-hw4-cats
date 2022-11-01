@@ -9,35 +9,11 @@ info:
 externalDocs:
   description: Find out more about this project
   url: https://cmu-313.github.io//assignments/hw4
-servers:
-  - url: https://github.com/CMU-313/fall-22-hw4-cats
 tags:
   - name: predict
     description: Predict the success of an applicant
 paths:
   /predict:
-    put:
-      tags:
-        - predict
-      summary: Update applicant pool data
-      description: Update existing applicant data
-      operationId: updateApplicantPool
-      requestBody:
-        description: Update the existing applicant pool data
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Applicant'
-        required: true
-      responses:
-        '200':
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Applicant'          
-        '400':
-          description: Invalid input
     post:
       tags:
         - predict
@@ -45,7 +21,7 @@ paths:
       description: Predict the success of a new applicant
       operationId: predictSuccess
       requestBody:
-        description: Predict the success of a new applicant
+        description: Predict the success of a new applicant. Note that data for G1 and G2 will be converted from strings to integers. Activities and higher education will be converted from a "yes" and "no" response to boolean.
         content:
           application/json:
             schema:
@@ -71,9 +47,11 @@ components:
       properties:
         school:
           type: string
+          enum: [GP, MS]
           example: GP
         reason:
           type: string
+          enum: [home, reputation, course, other]
           example: home
         failures:
           type: integer
@@ -92,8 +70,12 @@ components:
         G1:
           type: integer
           format: int32
-          example: 10
+          maximum: 20
+          minimum: 0
+          example: 12
         G2:
           type: integer
           format: int32
+          maximum: 20
+          minimum: 0
           example: 16
