@@ -1,0 +1,81 @@
+openapi: 3.0.3
+info:
+  title: Applicant Success API 3.0
+  description: |-
+    This microservice predicts applicant success to help the new graduate admissions system for CMU. 
+    This design was created because the number of applicants has been increasing each year and has become so large that admissions takes too much effort and time.
+
+  version: 1.0.11
+externalDocs:
+  description: Find out more about this project
+  url: https://cmu-313.github.io//assignments/hw4
+tags:
+  - name: predict
+    description: Predict the success of an applicant
+paths:
+  /predict:
+    post:
+      tags:
+        - predict
+      summary: Predict the success of an applicant
+      description: Predict the success of a new applicant
+      operationId: predictSuccess
+      requestBody:
+        description: Predict the success of a new applicant. Note that data for G1 and G2 will be converted from strings to integers. Activities and higher education will be converted from a "yes" and "no" response to boolean.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Applicant'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Applicant'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Applicant'
+        '400':
+          description: Invalid input
+
+components:
+  schemas:
+    Applicant:
+      type: object
+      properties:
+        school:
+          type: string
+          enum: [GP, MS]
+          example: GP
+        reason:
+          type: string
+          enum: [home, reputation, course, other]
+          example: home
+        failures:
+          type: integer
+          format: int32
+          example: 3
+        activities:
+          type: boolean
+          example: True
+        higher:
+          type: boolean
+          example: True
+        absences:
+          type: integer
+          format: int32
+          example: 10
+        G1:
+          type: integer
+          format: int32
+          maximum: 20
+          minimum: 0
+          example: 12
+        G2:
+          type: integer
+          format: int32
+          maximum: 20
+          minimum: 0
+          example: 16
