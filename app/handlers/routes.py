@@ -16,7 +16,7 @@ def configure_routes(app):
         return "try the predict route it is great!"
 
 
-    @app.route('/predict')
+    @app.route('/predict', methods=['GET', 'POST'])
     def predict():
         #use entries from the query string here but could also use json
         school  = request.args.get('school')
