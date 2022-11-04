@@ -22,7 +22,9 @@ for col, col_type in df.dtypes.iteritems():
         else:
             categoricals.append(col)
     
-df_conv = pd.get_dummies(df, columns=categoricals, dummy_na=True)
+df_conv = pd.get_dummies(df, columns=categoricals)
+
+print(df_conv)
      
 #dependent_variable = 'qual_student'
 dependent_variable = 'G3'
@@ -32,10 +34,10 @@ clf = rf(n_estimators = 1000)
 clf.fit(x, y)
 
 
+
 pred = clf.predict(x)
 accuracy = sklearn.metrics.f1_score(y, pred, average='weighted')
 print("Accuracy:" + str(accuracy))
 
 joblib.dump(clf, 'app/handlers/model.pkl')
 
-clf = joblib.load('app/handlers/model.pkl')
