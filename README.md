@@ -1,3 +1,34 @@
+#Final model information
+Attributes used to train the model:
+    1.school - student’s school (binary: “GP” - Gabriel Pereira or “MS” - Mousinho da Silveira)
+    2.reason - reason to choose this school (nominal: close to “home”, school “reputation”, “course” preference or “other”)
+    3.failures - number of past class failures (numeric: n if 1<=n<3, else 4)
+    4.activities - extra-curricular activities (binary: yes or no)
+    5.higher - wants to take higher education (binary: yes or no)
+    6.absences - number of school absences (numeric: from 0 to 93)
+    7.G1 - first period grade (numeric: from 0 to 20)
+    8.G2 - second period grade (numeric: from 0 to 20)
+
+Prediction:
+    qual_student - if the applicant qualifies for the program (binary/numeric: 1 if student has final grade of at least 15, else 0)
+
+Model final accuracy:
+    99.7%, much better than the <60% prediction rate of the dummy model
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # HW4 Starter Code and Instructions
 
 Please consult the [homework assignment](https://cmu-313.github.io//assignments/hw4) for additional context and instructions for this code.
