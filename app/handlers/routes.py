@@ -21,8 +21,7 @@ def configure_routes(app):
 
     @app.route('/predict', methods=['GET', 'POST'])
     def predict():
-        if request.json == 'undefined':
-            return "hi"
+        print("json: ", request.json)
         if request.json == {}:
             return "The json in the request is empty!",400
         
@@ -134,8 +133,9 @@ def configure_routes(app):
             })
         query = pd.get_dummies(query_df)
         prediction = clf.predict(query)
-        print(prediction)
-        return jsonify({'G3': list(prediction)})
+        d = {}
+        d['G3'] = int(prediction[0])
+        return jsonify(d)
 
     if __name__ == '__main__':
         clf = joblib.load('model.pkl')

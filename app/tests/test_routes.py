@@ -21,9 +21,7 @@ def test_predict_no_data():
 def test_predict_missing_json():
     url = '/predict'
     response = client.post(url)
-    #assert response.status_code == 400
-    assert response.get_data(as_text=True) == "The request is missing a json!"
-
+    assert response.status_code == 400
 
 def test_predict_fields_missing():
     url = '/predict'
@@ -101,7 +99,6 @@ def test_predict_valid():
     'G2': 11
     }
     response = client.post(url, json=test_data_valid)
-    #assert response.status_code == 200
-    print (response)
+    assert response.status_code == 200
     assert isinstance(response.json['G3'], int)
     
